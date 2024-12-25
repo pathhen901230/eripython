@@ -18,7 +18,6 @@ def pre_mgra_dist(df):
             plt.plot(x,y)
             plt.xlabel(col[i])
             plt.ylabel('Densidad')
-            plt.qqplot
             plt.show()
         except:
             pass
