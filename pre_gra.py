@@ -1,6 +1,11 @@
 
 #Dependencias
-
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+import statsmodels.api as sm
+import numpy as np
+import pandas as pd
+import os
 #Funciones
 
 def pre_mgra_dist(df):
