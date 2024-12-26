@@ -73,4 +73,21 @@ class estimate_RR:
               +' ,RR:'+str(self.RR)+
               ' ,IC025:'+str(self.ic025)+' ,IC975:'+str(self.ic975)))
 
+#Estimacion de proporciones
+class estimate_prop:
+    def __init__(self, phat, n,method="Wald"):
+    #Evaluar condiciones
+        if phat>=1:
+            sys.exit('Numero no es una proporcion, debe ser menor a 1')
+        else:
+            if method=="Wald":
+            #Calculo Wald
+               self.p= phat
+               q= 1-phat
+               std= np.sqrt((phat*q)/n)
+               self.ic025= phat - 1.96*std
+               self.ic975= phat + 1.96*std
+            #Calculo 
+
+
     
