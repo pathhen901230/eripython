@@ -120,4 +120,16 @@ class estimate_cor:
         dfe= pd.DataFrame([{'Correlacion':self.cor,'p':self.p}])
         return(dfe)
         print(len(isq['GLU_ANGIO']))    
-#    
+#Clase para eliminar outliers de un data frame(se toman como NA)
+class dfm_out:
+    def __init__(self,df1):
+        #df1 es el data frame de referencia con outliers a eliminar
+        self.mediana= np.median(df1)
+        self.oc= np.quantile(df1, 0.25)
+        self.tc= np.quantile(df1,0.75)
+        self.iqr= self.tc-self.oc
+        self.rd= self.oc - (1.5*self.iqr) 
+        self.ru= self.tc + (1.5*self.iqr)
+        df1[(df1 < self.rd) | (df1 > self.ru)] = None
+        self.df= df1
+        
