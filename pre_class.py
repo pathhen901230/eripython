@@ -89,5 +89,35 @@ class estimate_prop:
                self.ic975= phat + 1.96*std
             #Calculo 
 
-
-    
+#
+class estimate_cor:
+    def __init__(self,df1,df2):
+        #Estimacion de correlacion con grafica
+        #df1 es data frame x 
+        #df2 es data frame y
+        pdf= pd.concat([df1,df2],axis=1)
+        pdf= pdf.sort_values(by=str(pdf.columns[0]),ascending=True)
+        pdf= pdf.dropna()
+        print(pdf.columns[0])
+        ar1 = pdf.iloc[:,0]
+        ar2 = pdf.iloc[:,1]
+        de=stats.pearsonr(ar1,ar2)
+        self.cor= np.round(de[0],4)
+        self.p= np.round(de[1],4)
+        plt.plot(pdf.iloc[:,0],pdf.iloc[:,1],'o')
+        #Modelo de regresion lineal#
+        self.x= pdf.iloc[:,0]
+        self.y= pdf.iloc[:,1]
+        self.x= sm.add_constant(self.x)
+        mod=sm.OLS(self.y,self.x).fit()
+        plt.plot(self.x,mod.predict(self.x))
+        #
+        plt.title('Correlacion='+str(self.cor)+' ,p='+str(self.p))
+        plt.xlabel(str(pdf.columns[0]))
+        plt.ylabel(str(pdf.columns[1]))
+        plt.show()
+    def printf(self):
+        dfe= pd.DataFrame([{'Correlacion':self.cor,'p':self.p}])
+        return(dfe)
+        print(len(isq['GLU_ANGIO']))    
+#    
