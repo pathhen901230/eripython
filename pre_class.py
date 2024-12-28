@@ -132,4 +132,31 @@ class dfm_out:
         self.ru= self.tc + (1.5*self.iqr)
         df1[(df1 < self.rd) | (df1 > self.ru)] = None
         self.df= df1
+
+#Clase norm_z
+class norm_z:
+     def __init__(self,df):
+         self.df= df
+         self.mean= np.mean(df)
+         self.std= np.std(df)
+         self.z= (df-self.mean)/self.std
+     def printdf(self):
+         ndf= pd.concat([self.df,self.z],axis=1)
+         ndf.columns= [ndf.columns[0],'z']
+         ndf= ndf.sort_values(by='z',ascending=True)
+         return(ndf)
+
+class norm_minmax:
+     def __init__(self,df):
+         self.df= df
+         self.min= np.min(df)
+         self.max= np.max(df)
+         self.no= (df-self.min)/(self.max-self.min)
+     def printdf(self):
+         ndf= pd.concat([self.df,self.no],axis=1)
+         ndf.columns= [ndf.columns[0],'no']
+         ndf= ndf.sort_values(by='no',ascending=True)
+         return(ndf)
+
+
         
