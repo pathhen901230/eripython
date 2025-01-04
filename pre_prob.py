@@ -1,6 +1,17 @@
 
 #Programa para hacer operaciones de probabilidad
-
+#Dependencias
+import matplotlib.pyplot as plt
+import scipy
+import scipy.stats as stats
+import statsmodels.api as sm
+import sklearn as sk
+from sksurv.nonparametric import kaplan_meier_estimator
+import numpy as np
+import pandas as pd
+import os
+import random as rd
+#
 
 class pre_prob_combno:
     def __init__(self,n,k):
